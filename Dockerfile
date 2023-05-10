@@ -1,4 +1,4 @@
-FROM arm64v8/golang:1.19.5-buster as build
+FROM arm64v8/golang:1.20.4-buster as build
 LABEL maintainer="Infinity Works"
 
 ENV GO111MODULE=on
@@ -10,7 +10,7 @@ RUN go mod download \
     && go test ./... \
     && CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o /bin/main
 
-FROM arm64v8/alpine:3.17.1
+FROM arm64v8/alpine:3.18.0
 
 RUN apk --no-cache add ca-certificates \
      && addgroup exporter \
